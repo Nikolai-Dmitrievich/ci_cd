@@ -59,3 +59,10 @@ jobs:
           DB_USER: ${{ env.DB_USER }}
           DB_PASSWORD: ${{ env.DB_PASSWORD }}
           ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
+      - name: Деплой
+        uses: appleboy/ssh-action@master
+        with:
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          script: expect /root/ci_cd/deploy.exp
